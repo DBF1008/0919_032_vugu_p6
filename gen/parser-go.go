@@ -828,7 +828,7 @@ func (p *ParserGo) visitDefaultByType(state *parseGoState, n *html.Node) error {
 	case n.Type == html.TextNode:
 		err = p.visitNodeText(state, n)
 	case n.Type == html.ElementNode:
-		if strings.Contains(n.Data, ":") {
+		if isComponentElement(n) && n.Data != "vg-comp" {
 			// NOTE: this should check for a capital letter after the colon - this would distinguish
 			// svg:svg (valid regular HTML) from svg:Svg (a component reference)
 			err = p.visitNodeComponentElement(state, n)
